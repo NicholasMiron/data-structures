@@ -7,11 +7,13 @@ var Stack = function() {
   var storage = {};
 
   // Implement the methods below
+  // Adds passed in value to end of stack
   someInstance.push = function(value) {
     storage[stackSize] = value;
     stackSize++;
   };
 
+  //Removes last object added to stack
   someInstance.pop = function() {
     var poppedValue;
     if (stackSize > 0) {
@@ -22,6 +24,7 @@ var Stack = function() {
     return poppedValue;
   };
 
+  //Returns number of objects in stack
   someInstance.size = function() {
     return stackSize;
   };
