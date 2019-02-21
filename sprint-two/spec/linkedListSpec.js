@@ -51,5 +51,30 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
+  it('should have size 0 when created', function() {
+    expect(linkedList.size()).to.equal(0);
+  });
+
+  it('should increase size when adding nodes', function() {
+    linkedList.addToTail(3);
+    linkedList.addToTail(10);
+    linkedList.addToTail(2);
+    expect(linkedList.size()).to.equal(3);
+  });
+
+  it('should add to head when "addToHead" is called', function() {
+    linkedList.addToTail(3);
+    linkedList.addToHead(2);
+    expect(linkedList.head.next.value).to.equal(3);
+    expect(linkedList.head.value).to.equal(2);
+  });
+
+  it('should be able to sequentially call "addToHead"', function() {
+    linkedList.addToHead(1);
+    linkedList.addToHead(3);
+    linkedList.addToHead(2);
+    expect(linkedList.head.value).to.equal(2);
+  });
+
   // add more tests here to test the functionality of linkedList
 });
