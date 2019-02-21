@@ -15,6 +15,12 @@ var LinkedList = function() {
     list.length++;
   };
 
+  list.addToHead = function(value) {
+    var newHead = Node(value);
+    newHead.next = list.head;
+    list.head = newHead;
+  };
+
   list.removeHead = function() {
     if (list.head !== null) {
       var decapitatedHead = list.head;
