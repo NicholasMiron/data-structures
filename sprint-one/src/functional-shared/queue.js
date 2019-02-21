@@ -9,16 +9,15 @@ var Queue = function() {
 };
 
 var queueMethods = {
-  size : function() { return this.queueSize; },
-  enqueue : function(value) {
+  size: function() {return this.queueSize;},
+  enqueue: function(value) {
     this.storage[this.queueSize] = value;
     this.queueSize++;
   },
-  dequeue : function() {
-    if(this.queueSize > 0)
-    {
+  dequeue: function() {
+    if (this.queueSize > 0) {
       var dequeued = this.storage[0];
-      for(var key in this.storage) {
+      for (var key in this.storage) {
         this.storage[key - 1] = this.storage[key];
       }
       this.queueSize--;
