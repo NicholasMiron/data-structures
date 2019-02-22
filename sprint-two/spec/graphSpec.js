@@ -42,7 +42,7 @@ describe('graph', function() {
     graph.addEdge(5, 4);
     expect(graph.hasEdge(5, 4)).to.equal(true);
     graph.removeEdge(5, 4);
-    expect(graph.hasEdge(5 ,4)).to.equal(false);
+    expect(graph.hasEdge(5, 4)).to.equal(false);
   });
 
   it('should remove edges between nodes when a node is removed', function() {

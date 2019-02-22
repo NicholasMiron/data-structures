@@ -21,7 +21,7 @@ Graph.prototype.removeNode = function(node) {
     delete this.storage[node];
   }
   for (var nodes in this.storage) {
-    if(this.hasEdge(nodes, node)) {
+    if (this.hasEdge(nodes, node)) {
       this.removeEdge(nodes, node);
     }
   }
@@ -42,7 +42,7 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  if (this.contains(fromNode) && this.hasEdge(fromNode,toNode)) {
+  if (this.contains(fromNode) && this.hasEdge(fromNode, toNode)) {
     var indexInNode = this.storage[fromNode].indexOf(toNode);
     this.storage[fromNode].splice(indexInNode, 1);
   }
