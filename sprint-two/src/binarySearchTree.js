@@ -75,10 +75,9 @@ class BinarySearchTree {
     }
   }
 }
-
-
-
-
 /*
  * Complexity: What is the time complexity of the above functions?
+   Insert: O(1) - no loops, goes straight to correct spot
+   contains: O(1) - no loops, bunch of if statements
+   depthFirstLog O(1) - no loops, bunch of if statements
  */
