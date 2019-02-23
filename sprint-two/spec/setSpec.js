@@ -41,4 +41,10 @@ describe('set', function() {
     expect(set.size()).to.equal(1);
   });
 
+  it('should return 0 when more items are removed than are added', function() {
+    set.add('Nick');
+    set.remove('Nick');
+    set.remove('Frank');
+    expect(set.size()).to.equal(0);
+  });
 });
