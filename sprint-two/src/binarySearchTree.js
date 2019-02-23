@@ -7,27 +7,47 @@ class BinarySearchTree {
   
   //Insert a new value into the correct spot on the tree
   insert(value) {
-    //Create a newTree with value
-    var newTree = new BinarySearchTree(value);
 
-    //Helper function to search for correct placement
-    var searchChild = function(node, value) {
-      if (value < node.value) {
-        if (node.left === null) {
-          node.left = newTree;
-        } else {
-          searchChild(node.left, value);
-        }
-      } else if (value > node.value) {
-        if (node.right === null) {
-          node.right = newTree;
-        } else {
-          searchChild(node.right, value);
-        }
+    //////////////////////////////////////////////////////
+    //Recursive with use of helper function
+    //////////////////////////////////////////////////////
+    // //Create a newTree with value
+    // var newTree = new BinarySearchTree(value);
+
+    // //Helper function to search for correct placement
+    // var searchChild = function(node, value) {
+    //   if (value < node.value) {
+    //     if (node.left === null) {
+    //       node.left = newTree;
+    //     } else {
+    //       searchChild(node.left, value);
+    //     }
+    //   } else if (value > node.value) {
+    //     if (node.right === null) {
+    //       node.right = newTree;
+    //     } else {
+    //       searchChild(node.right, value);
+    //     }
+    //   }
+    // };
+    // //First call to helper function
+    // searchChild(this, value);
+    ///////////////////////////////////////////////////////
+
+    //Recursive using only insert
+    if (value < this.value) {
+      if (this.left === null) {
+        this.left = new BinarySearchTree(value);
+      } else {
+        this.left.insert(value);
       }
-    };
-    //First call to helper function
-    searchChild(this, value); 
+    } else if (value > this.value) {
+      if (this.right === null) {
+        this.right = new BinarySearchTree(value);
+      } else {
+        this.right.insert(value);
+      }
+    }
   }
 
   //Returns a boolean of whether or not our tree has any particular value
