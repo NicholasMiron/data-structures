@@ -1,46 +1,56 @@
-var BinarySearchTree = function(value) {
-  this.BSTStorage = new BSTNode(value);
-  this.left = 0;
-  this.right = 0;
-};
+class BinarySearchTree {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+  
+  //Insert a new value into the correct spot on the tree
+  insert(value) {
+    //Create a newTree with value
+    var newTree = new BinarySearchTree(value);
 
-BinarySearchTree.prototype.insert = function(value) {
-  var newNode = new BSTNode(value);
-
-  var findEmptyChild = function(currentNode, value) {
-    if (currentNode.value > value) {
-      if (currentNode.children[0] === null) {
-        currentNode.children[0] = newNode;
-      } else {
-        findEmptyChild(currentNode.children[0]);
+    //Helper function to search for correct placement
+    var searchChild = function(node, value, newTree) {
+      if (value < node.value) {
+        if (node.left === null) {
+          node.left = newTree;
+        } else {
+          searchChild(node.left, value, newTree);
+        }
+      } else if (value > node.value) {
+        if (node.right === null) {
+          node.right = newTree;
+        } else {
+          searchChild(node.right, value, newTree);
+        }
       }
+    };
+    //First call to helper function
+    searchChild(this, value, newTree); 
+  }
 
-    } else if (currentNode.value < value) {
-      if (currentNode.children[1] === null) {
-        currentNode.children[1] = newNode;
-      } else {
-        findEmptyChild(currentNode.children[1]);
+  //Returns a boolean of whether or not our tree has any particular value
+  contains(value) {
+    if (this.value === value) {
+      return true;
+    } else {
+      if (value < this.value && this.left !== null) {
+        return this.left.contains(value);
+      } else if (value > this.value && this.right !== null) {
+        return this.right.contains(value);
       }
-
     }
-  };
-  findEmptyChild(this.BSTStorage, value);
-};
-
-BinarySearchTree.prototype.contains = function(value) {
-
-};
-
-BinarySearchTree.prototype.depthFirstLog = function(cb) {
-
-};
+    return false;
+  }
 
 
-var BSTNode = function(value) {
-  this.nodeStorage = {};
-  this.value = value;
-  this.children = [null, null];
-};
+  depthFirstLog(cb) {
+  }
+}
+
+
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
