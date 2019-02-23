@@ -11,23 +11,23 @@ class BinarySearchTree {
     var newTree = new BinarySearchTree(value);
 
     //Helper function to search for correct placement
-    var searchChild = function(node, value, newTree) {
+    var searchChild = function(node, value) {
       if (value < node.value) {
         if (node.left === null) {
           node.left = newTree;
         } else {
-          searchChild(node.left, value, newTree);
+          searchChild(node.left, value);
         }
       } else if (value > node.value) {
         if (node.right === null) {
           node.right = newTree;
         } else {
-          searchChild(node.right, value, newTree);
+          searchChild(node.right, value);
         }
       }
     };
     //First call to helper function
-    searchChild(this, value, newTree); 
+    searchChild(this, value); 
   }
 
   //Returns a boolean of whether or not our tree has any particular value
@@ -44,8 +44,15 @@ class BinarySearchTree {
     return false;
   }
 
-
+  //Executes a callback on every value in the tree
   depthFirstLog(cb) {
+    cb(this.value);
+    if (this.left !== null) {
+      this.left.depthFirstLog(cb);
+    }
+    if (this.right !== null) {
+      this.right.depthFirstLog(cb);
+    }
   }
 }
 
