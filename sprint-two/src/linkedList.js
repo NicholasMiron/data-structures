@@ -5,45 +5,74 @@ var LinkedList = function() {
   list.length = 0;
 
   list.addToTail = function(value) {
-    var newTail = Node(value);
-    if (list.head === null) {
-      list.head = newTail;
+    var newNode = Node(value);
+    if (!this.head) {
+      this.head = newNode;
     } else {
-      list.tail.next = newTail;
+      this.tail.next = newNode;
+      newNode.previous = this.tail;
     }
-    list.tail = newTail;
-    list.length++;
+    this.tail = newNode;
+    this.length++;
+  };
+
+  list.removeTail = function() {
+    var removedValue;
+    if (this.length > 0) {
+      removedValue = this.tail.value;
+      if (this.length === 1) {
+        delete this.head;
+        this.head = null;
+        this.tail = null;
+      } else {
+        this.tail = this.tail.previous;
+      }
+      this.length--;
+    }
+    return removedValue;
   };
 
   list.addToHead = function(value) {
-    var newHead = Node(value);
-    newHead.next = list.head;
-    list.head = newHead;
+    var newNode = Node(value);
+    if (!this.tail) {
+      this.tail = newNode;
+    } else {
+      this.head.previous = newNode;
+      newNode.next = this.head;
+    }
+    this.head = newNode;
+    this.length++;
   };
 
   list.removeHead = function() {
-    if (list.head !== null) {
-      var decapitatedHead = list.head;
-      list.head = list.head.next;
-      list.length--;
-      return decapitatedHead.value;
+    var removedValue;
+    if (this.length > 0) {
+      removedValue = this.head.value;
+      if (this.length === 1) {
+        delete this.head;
+        this.head = null;
+        this.tail = null;
+      } else {
+        this.head = this.head.next;
+      }
+      this.length--;
     }
+    return removedValue;
   };
 
   list.contains = function(target) {
-    var currentNode = list.head;
-    for (var i = 0; i < list.length; i++) {
+    var currentNode = this.head;
+    while (currentNode !== null) {
       if (currentNode.value === target) {
         return true;
-      } else {
-        currentNode = currentNode.next;
       }
+      currentNode = currentNode.next;
     }
     return false;
   };
-
+  
   list.size = function() {
-    return list.length;
+    return this.length;
   };
 
   return list;
@@ -53,6 +82,7 @@ var Node = function(value) {
   var node = {};
 
   node.value = value;
+  node.previous = null;
   node.next = null;
 
   return node;
