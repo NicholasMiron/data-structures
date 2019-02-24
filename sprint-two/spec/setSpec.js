@@ -47,4 +47,26 @@ describe('set', function() {
     set.remove('Frank');
     expect(set.size()).to.equal(0);
   });
+
+  it('should be able to properly add numbers', function() {
+    set.add(1);
+    set.add('nick');
+    set.add(-4);
+    expect(set.size()).to.equal(3);
+    expect(set.contains('nick')).to.equal(true);
+    expect(set.contains(1)).to.equal(true);
+    expect(set.contains(-4)).to.equal(true);
+    expect(set.contains(4)).to.equal(false);
+  });
+
+  it('should be able to remove numbers after they have been added', function() {
+    set.add(1);
+    set.add('nick');
+    set.add(-49);
+    set.remove(1);
+    expect(set.contains(1)).to.equal(false);
+    expect(set.contains(-49)).to.equal(true);
+    set.remove(-49);
+    expect(set.contains(-49)).to.equal(false);
+  });
 });
