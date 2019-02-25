@@ -7,34 +7,6 @@ class BinarySearchTree {
   
   //Insert a new value into the correct spot on the tree
   insert(value) {
-
-    //////////////////////////////////////////////////////
-    //Recursive with use of helper function
-    //////////////////////////////////////////////////////
-    // //Create a newTree with value
-    // var newTree = new BinarySearchTree(value);
-
-    // //Helper function to search for correct placement
-    // var searchChild = function(node, value) {
-    //   if (value < node.value) {
-    //     if (node.left === null) {
-    //       node.left = newTree;
-    //     } else {
-    //       searchChild(node.left, value);
-    //     }
-    //   } else if (value > node.value) {
-    //     if (node.right === null) {
-    //       node.right = newTree;
-    //     } else {
-    //       searchChild(node.right, value);
-    //     }
-    //   }
-    // };
-    // //First call to helper function
-    // searchChild(this, value);
-    ///////////////////////////////////////////////////////
-
-    //Recursive using only insert
     if (value < this.value) {
       if (this.left === null) {
         this.left = new BinarySearchTree(value);
@@ -54,13 +26,14 @@ class BinarySearchTree {
   contains(value) {
     if (this.value === value) {
       return true;
-    } else {
-      if (value < this.value && this.left !== null) {
-        return this.left.contains(value);
-      } else if (value > this.value && this.right !== null) {
-        return this.right.contains(value);
-      }
     }
+    if (value < this.value && this.left !== null) {
+      return this.left.contains(value);
+    } 
+    if (value > this.value && this.right !== null) {
+      return this.right.contains(value);
+    }
+
     return false;
   }
 
@@ -73,6 +46,30 @@ class BinarySearchTree {
     if (this.right !== null) {
       this.right.depthFirstLog(cb);
     }
+  }
+
+  //Searches a tree
+  //Will complete each level of the tree before moving to the next
+  breadthFirstLog() {
+    //Create a queue to track search order
+    var breadthQueue = [this];
+    var returnVal = [];
+    var iterationFunc = function(root) {
+      //If current node has left and/or right push into queue
+      if (root.left) {
+        breadthQueue.push(root.left);
+      }
+      if (root.right) {
+        breadthQueue.push(root.right);
+      }
+      returnVal.push(root.value);
+      breadthQueue.shift();
+      if (breadthQueue[0]) {
+        iterationFunc(breadthQueue[0]);
+      }
+    };
+    iterationFunc(this);
+    return returnVal;
   }
 }
 /*
