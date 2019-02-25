@@ -68,5 +68,73 @@ describe('set', function() {
     expect(set.contains(-49)).to.equal(true);
     set.remove(-49);
     expect(set.contains(-49)).to.equal(false);
+    expect(set.size()).to.equal(1);
+  });
+
+  it('should be able to handle the adding of objects', function() {
+    var obj1 = {
+      aProp: 'hello',
+      aNum: 3,
+      aBool: true,
+      aFunc: function(value) { console.log(value); }
+    };
+    var obj2 = {
+      aProp: 'hi',
+      aNum: 1,
+      aBool: false,
+      aFunc: function(bear) { console.log(bear); }
+    };
+    set.add(obj1);
+    expect(set.size()).to.equal(1);
+    expect(set.contains(obj1)).to.equal(true);
+    expect(set.contains(obj2)).to.equal(false);
+  });
+
+  it('should handle the removal of objects', function() {
+    var obj1 = {
+      aProp: 'hello',
+      aNum: 3,
+      aBool: true,
+      aFunc: function(value) { console.log(value); }
+    };
+    var obj2 = {
+      aProp: 'hi',
+      aNum: 1,
+      aBool: false,
+      aFunc: function(bear) { console.log(bear); }
+    };
+    set.add(obj1);
+    set.add(obj2);
+    set.remove(obj1);
+    expect(set.size()).to.equal(1);
+    expect(set.contains(obj1)).to.equal(false);
+    expect(set.contains(obj2)).to.equal(true);
+  });
+
+  it('should be able to handle the adding of arrays', function() {
+    var arr1 = [1, 2, 3, 4];
+    var arr2 = ['hi', 'hello', 'bonjour'];
+    var arr3 = ['hola', true, 1];
+    set.add(arr1);
+    set.add(arr2);
+    expect(set.size()).to.equal(2);
+    expect(set.contains(arr1)).to.equal(true);
+    expect(set.contains(arr2)).to.equal(true);
+    expect(set.contains(arr3)).to.equal(false);
+  });
+
+  it('should handle the removal of arrays', function() {
+    var arr1 = [1, 2, 3, 4];
+    var arr2 = ['hi', 'hello', 'bonjour'];
+    var arr3 = ['hola', true, 1];
+    set.add(arr1);
+    set.add(arr2);
+    set.add(arr3);
+    expect(set.size()).to.equal(3);
+    set.remove(arr2);
+    expect(set.size()).to.equal(2);
+    expect(set.contains(arr1)).to.equal(true);
+    expect(set.contains(arr2)).to.equal(false);
+    expect(set.contains(arr3)).to.equal(true);
   });
 });
