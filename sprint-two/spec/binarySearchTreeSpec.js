@@ -37,4 +37,21 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3, 7]);
   });
+
+  it('should log values in the breadth first search way', function() {
+    var array = [];
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(13);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(15);
+
+    array = binarySearchTree.breadthFirstLog();
+    //Uses eql which checks equality for arrays
+    expect(array).to.eql([5, 3, 13, 2, 4, 7, 15, 1, 6, 10]);
+  });
 });
