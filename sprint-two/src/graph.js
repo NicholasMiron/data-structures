@@ -17,13 +17,13 @@ Graph.prototype.contains = function(node) {
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
-  if (this.contains(node)) {
-    delete this.storage[node];
-  }
   for (var nodes in this.storage) {
     if (this.hasEdge(nodes, node)) {
       this.removeEdge(nodes, node);
     }
+  }
+  if (this.contains(node)) {
+    delete this.storage[node];
   }
 };
 
@@ -37,14 +37,28 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
-  this.storage[fromNode].push(toNode);
+  if (this.contains(fromNode) && this.contains(toNode)) {
+    if(!this.hasEdge(fromNode, toNode)) {
+      this.storage[fromNode].push(toNode);
+    }
+    if (!this.hasEdge(toNode, fromNode)) {
+      this.storage[toNode].push(fromNode);
+    }
+  }
 };
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  if (this.contains(fromNode) && this.hasEdge(fromNode, toNode)) {
-    var indexInNode = this.storage[fromNode].indexOf(toNode);
-    this.storage[fromNode].splice(indexInNode, 1);
+  if (this.contains(fromNode) && this.contains(toNode)) {
+    var indexFromNode = this.storage[fromNode].indexOf(toNode);
+    var indexToNode = this.storage[toNode].indexOf(fromNode);
+    if (indexFromNode !== -1) {
+      this.storage[fromNode].splice(indexFromNode, 1);
+    }
+    if (indexToNode !== -1) {
+      this.storage[toNode].splice(indexToNode, 1);
+    }
+    
   }
 };
 
