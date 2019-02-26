@@ -51,7 +51,20 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(15);
 
     array = binarySearchTree.breadthFirstLog();
+    console.log(array);
     //Uses eql which checks equality for arrays
-    expect(array).to.eql([5, 3, 13, 2, 4, 7, 15, 1, 6, 10]);
+    expect(array).to.eql([3, 1, 6, 2, 4, 7, 5, 13, 10, 15]);
+  });
+
+  it('should rebalance when max depth twice as large as min depth', function() {
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(3);
+    expect(binarySearchTree.left.right.value).to.equal(3);
+    expect(binarySearchTree.value).to.equal(4);
+    expect(binarySearchTree.right.right.value).to.equal(10);
+    expect(binarySearchTree.right.value).to.equal(5);
+    expect(binarySearchTree.left.value).to.equal(2);
   });
 });
